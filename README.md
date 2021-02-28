@@ -1,5 +1,5 @@
 # jaguar-app
 
-App de Jaguar Education creada con en React Native utilizando expo cli
+App de Jaguar Education creada en React Native utilizando expo cli
 
 
