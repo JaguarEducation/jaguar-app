@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Button, View, Text, StyleSheet } from 'react-native';
 import { DefaultTheme, NavigationContainer, useTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
@@ -75,15 +74,6 @@ function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  lightThemeText: {
-    color: '#242C40',
-  },
-  darkThemeText: {
-    color: '#D0D0C0',
-  },
-});
 
 export default (
 
