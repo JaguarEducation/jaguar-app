@@ -8,39 +8,64 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import ButtonLesson from '../components/ButtonLesson';
 import LessonScreen from './LessonScreen';
-
-
-const icono1 = <MaterialCommunityIcons name="numeric" size={45} color="#f2f0eb" onPress={() => navigation.navigate('Lección')} />;
+import SeparatorH from "../components/SeparatorH";
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function HomeScreen({ navigation }) {
-  const { colors } = useTheme();
   return (
     <ScrollView>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
-        <View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 25 }}>
+        <ButtonLesson
+          text="Intro"
+          onPress={() => navigation.navigate('Lección')}
+          icon={<FontAwesome5 name="egg" size={45} color="#f2f0eb" />}
+        />
+        <View style={styles.row}>
           <ButtonLesson
-            text="Intro"
-            icon={<FontAwesome5 name="egg" size={45} color="#f2f0eb" onPress={() => navigation.navigate('Lección')} />}
+            text="Hola mundo"
+            onPress={() => navigation.navigate('Lección')}
+            icon={<FontAwesome name="child" size={45} color="#f2f0eb" />}
           />
-          <View style={styles.row}>
-            <ButtonLesson
-              text="Hola mundo"
-              icon={<FontAwesome name="child" size={45} color="#f2f0eb" onPress={() => navigation.navigate('Lección')} />}
-            />
-            <ButtonLesson
-              text="Entrada"
-              icon={<FontAwesome5 name="keyboard" size={45} color="#f2f0eb" onPress={() => navigation.navigate('Lección')} />}
-            />
-            <ButtonLesson
-              text="Variables"
-              icon={<FontAwesome5 name="memory" size={45} color="#f2f0eb" onPress={() => navigation.navigate('Lección')} />}
-            />
-            <ButtonLesson
-              text="Variables"
-              icon={<MaterialCommunityIcons name="numeric" size={45} color="#f2f0eb" onPress={() => navigation.navigate('Lección')} />}
-            />
-          </View>
-
+          <ButtonLesson
+            text="Entrada"
+            onPress={() => navigation.navigate('Lección')}
+            icon={<FontAwesome5 name="keyboard" size={45} color="#f2f0eb" />}
+          />
+          <ButtonLesson
+            text="Variables"
+            onPress={() => navigation.navigate('Lección')}
+            icon={<FontAwesome5 name="memory" size={45} color="#f2f0eb" />}
+          />
+          <ButtonLesson
+            text="Enteros"
+            onPress={() => navigation.navigate('Lección')}
+            icon={<MaterialCommunityIcons name="numeric" size={45} color="#f2f0eb" />}
+          />
+        </View>
+      </View>
+      <SeparatorH />
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 25 }}>
+        <View style={styles.row}>
+          <ButtonLesson
+            text="Hola mundo 2"
+            onPress={() => navigation.navigate('Lección')}
+            icon={<FontAwesome name="child" size={45} color="#f2f0eb" />}
+          />
+          <ButtonLesson
+            text="Entrada 2"
+            onPress={() => navigation.navigate('Lección')}
+            icon={<FontAwesome5 name="keyboard" size={45} color="#f2f0eb" />}
+          />
+          <ButtonLesson
+            text="Variables 2"
+            onPress={() => navigation.navigate('Lección')}
+            icon={<FontAwesome5 name="memory" size={45} color="#f2f0eb" />}
+          />
+          <ButtonLesson
+            text="Enteros 2"
+            onPress={() => navigation.navigate('Lección')}
+            icon={<MaterialCommunityIcons name="numeric" size={45} color="#f2f0eb" />}
+          />
         </View>
       </View>
     </ScrollView>
@@ -67,10 +92,12 @@ const HomeStackScreen = () => {
           },
           headerTitleAlign: 'left',
           headerRight: () => (
-            <View style={styles.iconContainer}>
-              <FontAwesome5 name="bolt" size={24} color={colors.text} onPress={() => alert('This is a button!')} />
-              <Text style={{ color: colors.text, fontSize: 18, fontWeight: '900' }} >14</Text>
-            </View>
+            <TouchableOpacity onPress={() => alert('This is a button!')}>
+              <View style={styles.iconContainer}>
+                <FontAwesome5 name="bolt" size={24} color={colors.text} />
+                <Text style={{ color: colors.text, fontSize: 18, fontWeight: '900' }} >14</Text>
+              </View>
+            </TouchableOpacity>
           ),
         }}
       />
@@ -86,9 +113,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingRight: 25,
     width: 75,
-  },
-  textHeader: {
-    fontSize: 20,
   },
   row: {
     width: 230,

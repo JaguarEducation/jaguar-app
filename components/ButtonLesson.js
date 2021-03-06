@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
 const ButtonLesson = (props) => {
     const { colors } = useTheme();
     return (
+        <TouchableOpacity onPress={props.onPress}>
         <View style={styles.lessonButton}>
             <View style={styles.circle}>
                 {props.icon}
             </View>
-            <Text style={{ color: colors.text }}>{props.text}</Text>
+            <Text style={{ color: colors.text, fontWeight: "700", fontSize: 14, marginTop: 10 }}>{props.text}</Text>
         </View>
+        </TouchableOpacity>
     );
 }
 
