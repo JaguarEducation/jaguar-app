@@ -21,8 +21,8 @@ expo start
 
 👤 **Angel Flores**
 
-* Website: angelflower.me
-* Twitter: [@angelfc\_flower](https://twitter.com/angelfc\_flower)
+* Website: 
+* Twitter: [@angelfc_flower](https://twitter.com/angelfc_flower)
 * Github: [@AngelFlower](https://github.com/AngelFlower)
 * LinkedIn: [@soyangelflores](https://linkedin.com/in/soyangelflores)
 

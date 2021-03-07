@@ -1,85 +1,42 @@
-import * as React from 'react';
-import { DefaultTheme, NavigationContainer, useTheme } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
+import React, { useState } from 'react';
+import Routes from './src/routes'
+import * as Font from 'expo-font';
+import AppLoading from 'expo-app-loading';
+import * as firebase from 'firebase';
+import firebaseConfig from './src/config/firebaseConfig';
+import { AppearanceProvider } from 'react-native-appearance';
 import { StatusBar } from 'expo-status-bar';
-import { FontAwesome5 } from '@expo/vector-icons';
-//Screens
-import HomeStackScreen from './screens/HomeStackScreen';
-import ChallengeStackScreen from './screens/ChallengeStackScreen';
-import PaperStackScreen from './screens/PaperStackScreen';
-import SettingsStackScreen from './screens/SettingsStackScreen';
 
-const Tab = createBottomTabNavigator();
-
-function App() {
-
-  const scheme = useColorScheme();
-
-  const MyDarkTheme = {
-    dark: true,
-    colors: {
-      primary: "blue",
-      background: "#000023",
-      card: "#000028",
-      text: "#FFFFFF",
-      border: "#000028",
-      notification: "#9933FF",
-    }
-  };
-  return (
-    <NavigationContainer theme={scheme === "dark" ? MyDarkTheme : DefaultTheme}>
-      <Tab.Navigator screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-          switch (route.name) {
-            case 'Inicio':
-              iconName = focused
-                ? 'centercode'
-                : 'centercode';
-              break;
-
-            case 'Reto':
-              iconName = focused
-                ? 'clock'
-                : 'clock';
-              break;
-
-            case 'Teoría':
-              iconName = focused
-                ? 'newspaper'
-                : 'newspaper';
-              break;
-
-            case 'Configuración':
-              iconName = focused
-                ? 'cog'
-                : 'cog';
-              break;
-          }
-          // You can return any component that you like here!
-          return <FontAwesome5 name={iconName} size={size} color={color} />;
-        },
-      })}
-        tabBarOptions={{
-          activeTintColor: 'blue',
-          inactiveTintColor: 'gray',
-        }}
-      >
-        <Tab.Screen name="Inicio" component={HomeStackScreen} />
-        <Tab.Screen name="Reto" component={ChallengeStackScreen} />
-        <Tab.Screen name="Teoría" component={PaperStackScreen} />
-        <Tab.Screen name="Configuración" component={SettingsStackScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app(); // if already initialized, use that one
 }
 
-export default (
+const getFonts = async () => await Font.loadAsync(
+  {
+    'Lato': require('./src/assets/fonts/Lato-Regular.ttf'),
+    'Lato-Bold': require('./src/assets/fonts/Lato-Bold.ttf'),
+  });
 
-) => (
-  <AppearanceProvider>
-    <App />
-    <StatusBar style="auto" />
-  </AppearanceProvider>
-);
+
+export default function App() {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+  return (
+    <AppearanceProvider>
+      { fontsLoaded ?
+        (
+
+          <Routes />
+        ) :
+        <AppLoading
+          startAsync={getFonts}
+          onFinish={() => setFontsLoaded(true)}
+          onError={console.warn}
+        />
+      }
+      <StatusBar style="auto" />
+    </AppearanceProvider>
+
+  );
+}

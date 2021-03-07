@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, View, Text, StyleSheet } from 'react-native';
+import { Button, View, Text, TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
+import * as firebase from 'firebase';
 import { useTheme } from '@react-navigation/native';
 
 import DetailsScreen from './DetailsScreen';
@@ -9,11 +10,7 @@ function SettingsScreen({ navigation }) {
     const { colors } = useTheme();
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{ color: colors.text }}>Pantalla de configuración</Text>
-            <Button
-                title="Ir a detalles"
-                onPress={() => navigation.navigate('Detalles')}
-            />
+            <Button title="Salir"onPress={async () => { firebase.auth().signOut() }}/>
         </View>
     );
 }
