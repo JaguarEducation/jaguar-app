@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, View, Text, StyleSheet, ScrollView } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useTheme } from '@react-navigation/native';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -17,28 +18,28 @@ function HomeScreen({ navigation }) {
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 25, marginBottom: 25 }}>
         <ButtonLesson
           text="Intro"
-          onPress={() => navigation.navigate('Lección')}
+          onPress={() => navigation.navigate('Lección', { type: "easy"})}
           icon={<FontAwesome5 name="egg" size={45} color="#f2f0eb" />}
         />
         <View style={styles.row}>
           <ButtonLesson
             text="Hola mundo"
-            onPress={() => navigation.navigate('Lección')}
+            onPress={() => navigation.navigate('Lección', { type: "easy"})}
             icon={<FontAwesome name="child" size={45} color="#f2f0eb" />}
           />
           <ButtonLesson
             text="Entrada"
-            onPress={() => navigation.navigate('Lección')}
+            onPress={() => navigation.navigate('Lección', { type: "easy"})}
             icon={<FontAwesome5 name="keyboard" size={45} color="#f2f0eb" />}
           />
           <ButtonLesson
             text="Variables"
-            onPress={() => navigation.navigate('Lección')}
+            onPress={() => navigation.navigate('Lección', { type: "easy"})}
             icon={<FontAwesome5 name="memory" size={45} color="#f2f0eb" />}
           />
           <ButtonLesson
             text="Enteros"
-            onPress={() => navigation.navigate('Lección')}
+            onPress={() => navigation.navigate('Lección', { type: "easy"})}
             icon={<MaterialCommunityIcons name="numeric" size={45} color="#f2f0eb" />}
           />
         </View>
@@ -48,22 +49,22 @@ function HomeScreen({ navigation }) {
         <View style={styles.row}>
           <ButtonLesson
             text="Hola mundo 2"
-            onPress={() => navigation.navigate('Lección')}
+            onPress={() => navigation.navigate('Lección', { type: "easy"})}
             icon={<FontAwesome name="child" size={45} color="#f2f0eb" />}
           />
           <ButtonLesson
             text="Entrada 2"
-            onPress={() => navigation.navigate('Lección')}
+            onPress={() => navigation.navigate('Lección', { type: "easy"})}
             icon={<FontAwesome5 name="keyboard" size={45} color="#f2f0eb" />}
           />
           <ButtonLesson
             text="Variables 2"
-            onPress={() => navigation.navigate('Lección')}
+            onPress={() => navigation.navigate('Lección', { type: "easy"})}
             icon={<FontAwesome5 name="memory" size={45} color="#f2f0eb" />}
           />
           <ButtonLesson
             text="Enteros 2"
-            onPress={() => navigation.navigate('Lección')}
+            onPress={() => navigation.navigate('Lección', { type: "easy"})}
             icon={<MaterialCommunityIcons name="numeric" size={45} color="#f2f0eb" />}
           />
         </View>
@@ -101,7 +102,7 @@ const HomeStackScreen = () => {
           ),
         }}
       />
-      <HomeStack.Screen name="Lección" component={LessonScreen} />
+      <HomeStack.Screen  name="Lección" component={LessonScreen} />
     </HomeStack.Navigator>
   );
 }

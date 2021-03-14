@@ -7,11 +7,19 @@ import {
   Picker,
   Button
 } from "react-native";
+import { useTheme } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useRoute } from '@react-navigation/native';
 import Question from "./Quiz/Question";
 
-export default class Questions extends React.Component {
-  constructor(props) {
+
+
+class Questions extends React.Component {
+  
+  constructor(props, route) {
     super(props);
+    
 
     this.state = {
       loading: false,
@@ -26,11 +34,14 @@ export default class Questions extends React.Component {
       completed: false
     };
   }
-
+  
+  
   fetchQuestions = async () => {
+    console.log(`Aqui ${this.props.type}`);
     await this.setState({ loading: true });
     const response = await fetch(
-      `https://opentdb.com/api.php?amount=10&difficulty=medium`
+      //`https://opentdb.com/api.php?amount=10&difficulty=medium`
+      `http://192.168.0.130:3000/quiz/difficulty=${this.props.type}`
     );
     const questions = await response.json();
 
@@ -66,22 +77,28 @@ export default class Questions extends React.Component {
     const results = { ...this.state.results };
 
     results.score = isCorrect ? results.score + 5 : results.score;
+    
     results.correctAnswers = isCorrect
       ? results.correctAnswers + 1
       : results.correctAnswers;
 
+    
+
     this.setState({
       current: index + 1,
       results,
-      completed: index === 9 ? true : false
+      completed: index === 9 ? true : false,
     });
+    isCorrect ? alert('Correcto'): alert('Incorrecto');
+    console.log(isCorrect);
   };
 
   componentDidMount() {
     this.fetchQuestions();
   }
-
+  
   render() {
+    const { colors } = this.props;
     return (
       <View style={styles.container}>
         {!!this.state.loading && (
@@ -94,12 +111,18 @@ export default class Questions extends React.Component {
         {!!this.state.questions.length > 0 &&
           this.state.completed === false && (
             <Question
+            color = { colors.text } 
               onSelect={answer => {
-                this.submitAnswer(this.state.current, answer);
+                !(answer == null) ? (console.log('ok'),
+                this.submitAnswer(this.state.current, answer),
+                answer = null
+                ) :  alert('Constesta algo');
+                
               }}
               question={this.state.questions[this.state.current]}
               correctPosition={Math.floor(Math.random() * 3)}
               current={this.state.current}
+              
             />
           )}
 
@@ -138,3 +161,11 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
+export default function({ navigation }) {
+  const { colors } = useTheme();
+  const route = useRoute();
+  const { type } = route.params;
+  //console.log(`Aqui ${type}`)
+  return <Questions colors={colors} type={type}/>;
+}

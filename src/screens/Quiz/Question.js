@@ -1,25 +1,28 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Button, TouchableOpacity,withTheme } from "react-native";
 import { RadioGroup, RadioButton } from "react-native-flexi-radio-button";
 
-export default class Question extends React.Component {
-  constructor() {
-    super();
+class Question extends React.Component {
+  constructor(props) {
+    super(props);
+    
 
     this.state = {
       answer: null
     };
-  }
 
+}
   renderOptions = question => {
+    //console.log(this.props.color)
+    //styles({color : this.props.color}).radioText;
     if (question.type === "boolean") {
       return [
         <RadioButton value={"True"} key={1}>
-          <Text style={styles.radioText}>True</Text>
+          <Text style={this.props.styles.radioText}>True</Text>
         </RadioButton>,
 
         <RadioButton value={"False"} key={2}>
-          <Text style={styles.radioText}>False</Text>
+          <Text style={this.props.styles.radioText}>False</Text>
         </RadioButton>
       ];
     } else {
@@ -32,16 +35,17 @@ export default class Question extends React.Component {
           let key2 = `${question.id}-100`;
           result.push(
             <RadioButton value={question.correct_answer} key={key2}>
-              <Text style={styles.radioText}>{question.correct_answer}</Text>
+              <Text style={this.props.styles.radioText}>{question.correct_answer}</Text>
             </RadioButton>
           );
         }
 
         result.push(
           <RadioButton value={item} key={key}>
-            <Text style={styles.radioText}>{item}</Text>
+            <Text style={this.props.styles.radioText}>{item}</Text>
           </RadioButton>
         );
+        result
       });
 
       return result;
@@ -49,10 +53,11 @@ export default class Question extends React.Component {
   };
 
   render() {
+    
     return (
       <View style={{ flexDirection: "column", paddingHorizontal:20, paddingVertical:10 }}>
         <Text style={{ fontSize: 16, color: "#666", textAlign: "right" }}>
-          {this.props.current + 1} out of 10
+          {this.props.current + 1} de 10
         </Text>
 
         <Text style={{ fontSize: 24, fontWeight: "bold", color: "#3498db" }}>
@@ -60,18 +65,19 @@ export default class Question extends React.Component {
         </Text>
         <RadioGroup
           onSelect={(index, answer) => this.setState({ answer })}
-          selectedIndex={null}
+          selectedIndex= {this.state.answer }
         >
           {this.renderOptions(this.props.question)}
         </RadioGroup>
-        <View style={styles.box}>
+        <View style={this.props.styles.box}>
         
         <Button
-          title="Submit Answser"
-          color="gray"
-
+          title="Contestar"
           onPress={() => {
-            this.props.onSelect(this.state.answer);  
+            
+            this.props.onSelect(this.state.answer);
+            this.state.answer = null;
+            
           }}
         ></Button>
         </View>
@@ -80,11 +86,18 @@ export default class Question extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  radioText: {
-    fontSize: 18
-  },
-  box : {
-      marginTop: 30,
-  }
-});
+
+
+
+export default function(props) {
+  const styles = StyleSheet.create({
+    radioText: {
+      fontSize: 18,
+      color: props.color
+    },
+    box : {
+        marginTop: 30,
+    }
+  });
+  return <Question {...props} styles={styles}/>;
+}

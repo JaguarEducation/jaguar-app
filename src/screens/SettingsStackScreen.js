@@ -8,8 +8,11 @@ import DetailsScreen from './DetailsScreen';
 
 function SettingsScreen({ navigation }) {
     const { colors } = useTheme();
+    console.log(firebase.auth().currentUser.displayName);
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={{color: colors.text}}>{ firebase.auth().currentUser.displayName }</Text>
+            <Text style={{color: colors.text}}>{ firebase.auth().currentUser.email }</Text>
             <Button title="Salir"onPress={async () => { firebase.auth().signOut() }}/>
         </View>
     );

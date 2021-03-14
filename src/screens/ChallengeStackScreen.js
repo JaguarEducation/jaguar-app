@@ -13,7 +13,7 @@ function ChallengeScreen({ navigation }) {
       <Text style={{ color: colors.text }}>Pantalla de reto</Text>
       <Button
         title="Ir a lección"
-        onPress={() => navigation.navigate('Lección')}
+        onPress={() => navigation.navigate('Lección', { type: 'challenge'})}
       />
     </View>
   );
