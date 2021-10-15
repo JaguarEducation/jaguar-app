@@ -41,7 +41,7 @@ class Questions extends React.Component {
     await this.setState({ loading: true });
     const response = await fetch(
       //`https://opentdb.com/api.php?amount=10&difficulty=medium`
-      `http://192.168.0.130:3000/quiz/difficulty=${this.props.type}`
+      `http://192.168.0.132:3000/quiz/difficulty=${this.props.type}`
     );
     const questions = await response.json();
 

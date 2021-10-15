@@ -21,14 +21,22 @@ function Home() {
     colors: {
       primary: "blue",
       background: "#000023",
-      card: "#000028",
+      card: "#000023",
       text: "#FFFFFF",
-      border: "#000028",
+      border: "#000020",
       notification: "#9933FF",
     }
   };
+  const MyLigthTheme = {
+    dark: false,
+    colors: {
+      background: "white",
+      card: "white",
+      border: "rgb(250,250,250)",
+    }
+  };
   return (
-    <NavigationContainer theme={scheme === "dark" ? MyDarkTheme : DefaultTheme} independent={true}>
+    <NavigationContainer theme={scheme === "dark" ? MyDarkTheme : MyLigthTheme} independent={true}>
       <Tab.Navigator screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
